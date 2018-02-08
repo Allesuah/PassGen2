@@ -1,65 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="?android:selectableItemBackground"
+    >
 
-    <TextView
-        android:id="@+id/tV_Cuenta"
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:padding="@dimen/dimensionesRelative"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="396dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:fontFamily="sans-serif-smallcaps"
-        android:text="Cuenta"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.05"
-        app:layout_constraintStart_toEndOf="@+id/imagen_Cuenta"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.09" />
+        >
 
-    <TextView
-        android:id="@+id/tV_Contrasenia"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="4dp"
-        android:layout_weight="1"
-        android:fontFamily="sans-serif-smallcaps"
-        android:text="Contraseña"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.058"
-        app:layout_constraintStart_toEndOf="@+id/imagen_Cuenta"
-        app:layout_constraintTop_toBottomOf="@+id/tV_Cuenta" />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imagen_Cuenta"
+            android:adjustViewBounds="true"
+            />
+        <TextView
+            android:id="@+id/tV_Cuenta"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/imagen_Cuenta"
+            android:text="@string/cuentaTexto"
+            />
+        <TextView
+            android:id="@+id/tv_Filtro"
+            android:layout_width="wrap_content"
+            android:layout_below="@id/imagen_Cuenta"
+            android:layout_height="wrap_content"
+            android:text="@string/filtroTxt"
+            />
+        <TextView
+            android:id="@+id/tV_Contrasenia"
+            android:layout_width="wrap_content"
+            android:layout_below="@id/tv_Filtro"
+            android:layout_height="wrap_content"
+            android:text="@string/contraseniaTxt" />
 
-    <TextView
-        android:id="@+id/tv_Filtro"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_weight="1"
-        android:fontFamily="sans-serif-smallcaps"
-        android:text="Filtro"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.058"
-        app:layout_constraintStart_toEndOf="@+id/imagen_Cuenta"
-        app:layout_constraintTop_toBottomOf="@+id/tV_Contrasenia" />
 
-    <ImageView
-        android:id="@+id/imagen_Cuenta"
-        android:layout_width="69dp"
-        android:layout_height="70dp"
-        android:layout_marginVertical="5dp"
-        android:layout_weight="1"
-        app:srcCompat="@android:drawable/btn_star"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="16dp" />
-</android.support.constraint.ConstraintLayout>
+    </RelativeLayout>
+
+
+
+</android.support.v7.widget.CardView>

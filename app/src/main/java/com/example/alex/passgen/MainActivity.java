@@ -1,5 +1,6 @@
 package com.example.alex.passgen;
 
+import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -15,6 +16,7 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private AdaptadorPalabras mAdaptador;
     private int mCount = 0;
+
 
 
     @Override
@@ -37,20 +39,17 @@ public class MainActivity extends AppCompatActivity {
 
         mRecyclerView.setAdapter(mAdaptador);
 
-        //Dar al Recycler un manejador de plantilla estandard
+        //Dar al Recycler la layout
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         FloatingActionButton fab=(FloatingActionButton)findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener(){
 
-            @Override
+    }
 
-            public void onClick(View view){
-                int mListaPal=mListaPal.size();
-            }
-
-        };
+    public void lanzarActividad(View view){
+        Intent inActividad=new Intent(this, NuevaCuenta.class);
+        startActivity(inActividad);
 
     }
 }

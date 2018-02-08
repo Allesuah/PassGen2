@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">PassGen</string>
+    <string name="NombreTag">Introduce nombre de la cuenta:</string>
+    <string name="FiltroTag">Introduce categoria:</string>
+    <string name="GenerarButton">GENERAR CONTRASEÑA</string>
+    <string name="cuentaTexto">Cuenta</string>
+    <string name="contraseniaTxt">Contraseña</string>
+    <string name="filtroTxt">Filtro</string>
 </resources>
