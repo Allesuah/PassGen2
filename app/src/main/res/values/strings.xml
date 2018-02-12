@@ -6,4 +6,5 @@
     <string name="cuentaTexto">Cuenta</string>
     <string name="contraseniaTxt">Contraseña</string>
     <string name="filtroTxt">Filtro</string>
+    <string name="Boton_guardar">Guardar</string>
 </resources>

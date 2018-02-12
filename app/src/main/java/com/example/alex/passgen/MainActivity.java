@@ -1,6 +1,7 @@
 package com.example.alex.passgen;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,12 +12,18 @@ import android.view.View;
 
 import java.util.LinkedList;
 
+import static com.example.alex.passgen.NuevaCuenta.E_CONT;
+import static com.example.alex.passgen.NuevaCuenta.E_FIL;
+import static com.example.alex.passgen.NuevaCuenta.E_NOM;
+
 public class MainActivity extends AppCompatActivity {
-    private LinkedList<String> mListaPal = new LinkedList<>();
+    private LinkedList<Cuenta> mListaPal;
     private RecyclerView mRecyclerView;
     private AdaptadorPalabras mAdaptador;
     private int mCount = 0;
-
+    public static SharedPreferences archivo;
+    public static String sharedPrefFile="com.example.alex.passgen";
+    Cuenta cuenta;
 
 
     @Override
@@ -24,10 +31,16 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        for (int i = 0; i < 20; i++) {
-            mListaPal.addLast("BLA:" + mCount++);
-            Log.d("WordList", mListaPal.getLast());
-        }
+        archivo=getSharedPreferences(sharedPrefFile,MODE_PRIVATE);
+
+       if(savedInstanceState!=null){
+           savedInstanceState.getString(E_NOM);
+           savedInstanceState.getString(E_CONT);
+           savedInstanceState.getString(E_FIL);
+
+       }else{
+           mListaPal=new LinkedList<>();
+       }
 
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerview);
 

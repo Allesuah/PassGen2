@@ -1,6 +1,7 @@
 package com.example.alex.passgen;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -23,26 +24,53 @@ import org.w3c.dom.Text;
 
 public class NuevaCuenta extends AppCompatActivity {
 
+    static final String E_NOM="cuenta";
+    static final String E_FIL="Filtro";
+    static final String E_CONT="Pass";
     TextView nombreTV;
     TextView filtroTV;
     EditText nombreET;
     EditText filtroET;
     TextView contraTV;
     Button generador;
+    Cuenta cuenta;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.aniadir_cuenta);
 
-        nombreTV=(TextView)findViewById(R.id.NombreTag);
-        filtroTV=(TextView)findViewById(R.id.FiltroTag);
-        nombreET=(EditText) findViewById(R.id.NombreEt);
-        filtroET=(EditText)findViewById(R.id.FiltroEt);
-        contraTV=(TextView)findViewById(R.id.contraTV);
-        generador=(Button)findViewById(R.id.GeneraButton);
+        nombreTV = (TextView) findViewById(R.id.NombreTag);
+        filtroTV = (TextView) findViewById(R.id.FiltroTag);
+        nombreET = (EditText) findViewById(R.id.NombreEt);
+        filtroET = (EditText) findViewById(R.id.FiltroEt);
+        contraTV = (TextView) findViewById(R.id.contraTV);
+        generador = (Button) findViewById(R.id.GeneraButton);
+
+    }
+
+    public void guardarDatos(){
+            cuenta=new Cuenta();
+            cuenta.setNombre(nombreET.getText().toString());
+            cuenta.setFiltro(filtroET.getText().toString());
+            cuenta.setContraseña(contraTV.getText().toString());
 
 
+            /*
+            SharedPreferences.Editor editor = MainActivity.archivo.edit();
+            editor.p
+            editor.putString(E_NOM, );
+            editor.putString(E_FIL, filtro);
+            editor.putString(E_CONT, contra);
+
+            editor.apply();
+
+            Hay que convertirlo
+            */
+
+
+    }
+    public void generarContraseña(){
 
 
     }

@@ -2,6 +2,7 @@ package com.example.alex.passgen;
 
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.support.v7.view.menu.MenuView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -19,10 +20,10 @@ import java.util.LinkedList;
  */
 
 public class AdaptadorPalabras extends RecyclerView.Adapter<AdaptadorPalabras.WordViewHolder> {
-    private final LinkedList<String> listaStrings;
+    private final LinkedList<Cuenta> listaStrings;
     private LayoutInflater inflador;
 
-    AdaptadorPalabras(Context contexto,LinkedList<String> listaStrings){
+    AdaptadorPalabras(Context contexto,LinkedList<Cuenta> listaStrings){
         inflador=LayoutInflater.from(contexto);
         this.listaStrings=listaStrings;
     }
@@ -38,10 +39,11 @@ public class AdaptadorPalabras extends RecyclerView.Adapter<AdaptadorPalabras.Wo
 
     @Override
     public void onBindViewHolder(AdaptadorPalabras.WordViewHolder holder, int position) {
-        String mCurrent = listaStrings.get(position);
-        holder.cuentaTV.setText(mCurrent);
-        holder.filtroTV.setText(mCurrent);
-        holder.contraTV.setText(mCurrent);
+        Cuenta mCurrent = listaStrings.get(position);
+        holder.cuentaTV.setText(mCurrent.getNombre());
+        holder.filtroTV.setText(mCurrent.getFiltro());
+        holder.contraTV.setText(mCurrent.getContraseña());
+        holder.imagenV.setImageBitmap(mCurrent.getImagen());
     }
 
     @Override
