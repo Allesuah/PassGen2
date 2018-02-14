@@ -10,11 +10,9 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 
-import java.util.LinkedList;
+import com.google.gson.Gson;
 
-import static com.example.alex.passgen.NuevaCuenta.E_CONT;
-import static com.example.alex.passgen.NuevaCuenta.E_FIL;
-import static com.example.alex.passgen.NuevaCuenta.E_NOM;
+import java.util.LinkedList;
 
 public class MainActivity extends AppCompatActivity {
     private LinkedList<Cuenta> mListaPal;
@@ -33,18 +31,18 @@ public class MainActivity extends AppCompatActivity {
 
         archivo=getSharedPreferences(sharedPrefFile,MODE_PRIVATE);
 
-       if(savedInstanceState!=null){
-           savedInstanceState.getString(E_NOM);
-           savedInstanceState.getString(E_CONT);
-           savedInstanceState.getString(E_FIL);
+       if(savedInstanceState!=null){ //Aqui estas recibiendo los datos guardados en Preferences (añadidos en NuevaCuenta.java)
+           Gson gson = new Gson();
+           String json = archivo.getString("objetoCuenta", "");
+           Cuenta recibeDato = gson.fromJson(json, Cuenta.class);
 
-       }else{
+       }else{//Si no hay nada en el Preferences creas una lista de tipo Cuenta
            mListaPal=new LinkedList<>();
        }
 
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerview);
 
-        //Crear un adaptador y llenarlo con la info para ser mostrada
+        //Crea un adaptador y lo llena con la info para ser mostrada
 
         mAdaptador = new AdaptadorPalabras(this, mListaPal);
 
@@ -61,8 +59,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void lanzarActividad(View view){
-        Intent inActividad=new Intent(this, NuevaCuenta.class);
-        startActivity(inActividad);
+        Intent intActividad=new Intent(this, NuevaCuenta.class);
+        startActivity(intActividad);
 
     }
 }

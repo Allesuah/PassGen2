@@ -42,7 +42,7 @@ public class AdaptadorPalabras extends RecyclerView.Adapter<AdaptadorPalabras.Wo
         Cuenta mCurrent = listaStrings.get(position);
         holder.cuentaTV.setText(mCurrent.getNombre());
         holder.filtroTV.setText(mCurrent.getFiltro());
-        holder.contraTV.setText(mCurrent.getContraseña());
+        holder.contraTV.setText(mCurrent.getContrasenia());
         holder.imagenV.setImageBitmap(mCurrent.getImagen());
     }
 

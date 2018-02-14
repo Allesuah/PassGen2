@@ -11,7 +11,16 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.google.gson.Gson;
 
 import org.w3c.dom.Text;
 
@@ -49,28 +58,37 @@ public class NuevaCuenta extends AppCompatActivity {
 
     }
 
-    public void guardarDatos(){
+    public void guardarDatos(){ //Aqui estas colocando en el objeto cuenta cada dato recogido por los EditTexts
             cuenta=new Cuenta();
             cuenta.setNombre(nombreET.getText().toString());
             cuenta.setFiltro(filtroET.getText().toString());
-            cuenta.setContraseña(contraTV.getText().toString());
+            cuenta.setContrasenia(contraTV.getText().toString());
 
-
-            /*
-            SharedPreferences.Editor editor = MainActivity.archivo.edit();
-            editor.p
-            editor.putString(E_NOM, );
-            editor.putString(E_FIL, filtro);
-            editor.putString(E_CONT, contra);
-
-            editor.apply();
-
-            Hay que convertirlo
-            */
-
+        SharedPreferences  mPrefs = getPreferences(MODE_PRIVATE); //Aqui estas guardando en el Preferences los datos de cada objeto Cuenta
+        SharedPreferences.Editor prefsEditor = mPrefs.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(cuenta);
+        prefsEditor.putString("objetoCuenta", json);
+        prefsEditor.commit();
 
     }
-    public void generarContraseña(){
+    public void generarContrasenia(){
+        RequestQueue queue= Volley.newRequestQueue(this);
+        String url="http://www.passwordrandom.com/query?command=password";
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        contraTV.setText(response);
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // Handle error
+                    }
+                });
+
 
 
     }

@@ -11,16 +11,16 @@ import android.widget.ImageView;
 public class Cuenta {
     //variables
     String filtro;
-    String contraseña;
+    String contrasenia;
     String  nombre;
     Bitmap imagen;
 
-    public String getContraseña() {
-        return contraseña;
+    public String getContrasenia() {
+        return contrasenia;
     }
 
-    public void setContraseña(String contraseña) {
-        this.contraseña = contraseña;
+    public void setContrasenia(String contrasenia) {
+        this.contrasenia = contrasenia;
     }
 
     public String getNombre() {
@@ -47,8 +47,5 @@ public class Cuenta {
         this.filtro = filtro;
     }
 
-    public String toJSON(){
-        //Falta poner comillas simples
-        return'{filtro:"'+filtro+'", contraseña:'"+contraseña+"', nombre:'"+nombre+"'imagen:'"+imagen+"'}';
-    }
+
 }
