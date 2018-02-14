@@ -14,7 +14,8 @@
         android:layout_marginTop="24dp"
         android:text="@string/NombreTag"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginLeft="16dp" />
 
     <EditText
         android:id="@+id/NombreEt"
@@ -25,7 +26,8 @@
         android:ems="10"
         android:inputType="textPersonName"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/NombreTag" />
+        app:layout_constraintTop_toBottomOf="@+id/NombreTag"
+        android:layout_marginLeft="16dp" />
 
     <TextView
         android:id="@+id/FiltroTag"
@@ -35,7 +37,8 @@
         android:layout_marginTop="16dp"
         android:text="@string/FiltroTag"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/NombreEt" />
+        app:layout_constraintTop_toBottomOf="@+id/NombreEt"
+        android:layout_marginLeft="16dp" />
 
     <EditText
         android:id="@+id/FiltroEt"
@@ -46,7 +49,8 @@
         android:ems="10"
         android:inputType="textPersonName"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/FiltroTag" />
+        app:layout_constraintTop_toBottomOf="@+id/FiltroTag"
+        android:layout_marginLeft="16dp" />
 
     <Button
         android:id="@+id/GeneraButton"
