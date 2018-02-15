@@ -22,6 +22,8 @@ public class MainActivity extends AppCompatActivity {
     public static SharedPreferences archivo;
     public static String sharedPrefFile="com.example.alex.passgen";
     Cuenta cuenta;
+    public static final int INTENTRECIBIDO=1;
+    FloatingActionButton fab;
 
 
     @Override
@@ -34,12 +36,26 @@ public class MainActivity extends AppCompatActivity {
        if(savedInstanceState!=null){ //Aqui estas recibiendo los datos guardados en Preferences (añadidos en NuevaCuenta.java)
            Gson gson = new Gson();
            String json = archivo.getString("objetoCuenta", "");
-           Cuenta recibeDato = gson.fromJson(json, Cuenta.class);
+          /* LinkedList<Cuenta> recibeDato = gson.fromJson(json, Cuenta.class);*/
+
+
 
        }else{//Si no hay nada en el Preferences creas una lista de tipo Cuenta
            mListaPal=new LinkedList<>();
        }
 
+
+
+    }
+
+    public void lanzarActividad(View view){
+        Intent intActividad=new Intent(this, NuevaCuenta.class);
+        startActivityForResult(intActividad,INTENTRECIBIDO);
+
+    }
+
+    public void cargarListView(){
+        //Asigna el recyclerview
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerview);
 
         //Crea un adaptador y lo llena con la info para ser mostrada
@@ -54,14 +70,17 @@ public class MainActivity extends AppCompatActivity {
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        FloatingActionButton fab=(FloatingActionButton)findViewById(R.id.fab);
-
     }
 
-    public void lanzarActividad(View view){
-        Intent intActividad=new Intent(this, NuevaCuenta.class);
-        startActivity(intActividad);
-
+    public void onActivityResult(int requestCode, int resultCode,
+                                 Intent data) {
+        super.onActivityResult(requestCode,resultCode,data);
+        if(resultCode==INTENTRECIBIDO){
+            if(resultCode==RESULT_OK){
+                String respuesta=data.getStringExtra(NuevaCuenta.INTCUENTA);
+                cargarListView();
+            }
+        }
     }
 }
 

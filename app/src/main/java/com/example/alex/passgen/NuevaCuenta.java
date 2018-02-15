@@ -24,6 +24,10 @@ import com.google.gson.Gson;
 
 import org.w3c.dom.Text;
 
+import java.util.LinkedList;
+
+import static com.example.alex.passgen.MainActivity.sharedPrefFile;
+
 
 /**
  * Created by Alex on 08/02/2018.
@@ -33,9 +37,6 @@ import org.w3c.dom.Text;
 
 public class NuevaCuenta extends AppCompatActivity {
 
-    static final String E_NOM="cuenta";
-    static final String E_FIL="Filtro";
-    static final String E_CONT="Pass";
     TextView nombreTV;
     TextView filtroTV;
     EditText nombreET;
@@ -43,6 +44,9 @@ public class NuevaCuenta extends AppCompatActivity {
     TextView contraTV;
     Button generador;
     Cuenta cuenta;
+    public static final String INTCUENTA="Cuenta";
+    LinkedList<Cuenta> listaCuenta;
+    public static SharedPreferences archivo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,24 +59,45 @@ public class NuevaCuenta extends AppCompatActivity {
         filtroET = (EditText) findViewById(R.id.FiltroEt);
         contraTV = (TextView) findViewById(R.id.contraTV);
         generador = (Button) findViewById(R.id.GeneraButton);
+        archivo=getSharedPreferences(sharedPrefFile,MODE_PRIVATE);
+
+        if(savedInstanceState!=null){
+            Gson gson = new Gson();
+            String json = archivo.getString("objetoCuenta", "");
+
+            
+
+            listaCuenta.add(new Cuenta((nombreET.getText().toString()),(filtroET.getText().toString()),(contraTV.getText().toString())));
+
+
+        }else{//Si no hay nada en el Preferences creas una lista de tipo Cuenta
+            listaCuenta=new LinkedList<>();
+        }
 
     }
 
-    public void guardarDatos(){ //Aqui estas colocando en el objeto cuenta cada dato recogido por los EditTexts
-            cuenta=new Cuenta();
-            cuenta.setNombre(nombreET.getText().toString());
+    public void guardarDatos(View view){ //Aqui estas colocando en el objeto cuenta cada dato recogido por los EditText
+            /*cuenta.setNombre(nombreET.getText().toString());
             cuenta.setFiltro(filtroET.getText().toString());
-            cuenta.setContrasenia(contraTV.getText().toString());
+            cuenta.setContrasenia(contraTV.getText().toString());*/
 
-        SharedPreferences  mPrefs = getPreferences(MODE_PRIVATE); //Aqui estas guardando en el Preferences los datos de cada objeto Cuenta
-        SharedPreferences.Editor prefsEditor = mPrefs.edit();
-        Gson gson = new Gson();
-        String json = gson.toJson(cuenta);
-        prefsEditor.putString("objetoCuenta", json);
-        prefsEditor.commit();
+
+
+
+
+        /*SharedPreferences  mPrefs = getPreferences(MODE_PRIVATE); //Aqui estas guardando en el Preferences los datos de cada objeto Cuenta
+        SharedPreferences.Editor prefsEditor = mPrefs.edit();*/
+
+
+       /* prefsEditor.putString("objetoCuenta", json);
+        prefsEditor.commit();*/
+        Intent iniciarPadre=new Intent();
+        iniciarPadre.putExtra(INTCUENTA,json);
+        setResult(RESULT_OK,iniciarPadre);
+        finish();
 
     }
-    public void generarContrasenia(){
+    public void generarContrasenia(View view){
         RequestQueue queue= Volley.newRequestQueue(this);
         String url="http://www.passwordrandom.com/query?command=password";
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
@@ -81,13 +106,14 @@ public class NuevaCuenta extends AppCompatActivity {
                     public void onResponse(String response) {
                         contraTV.setText(response);
                     }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        // Handle error
-                    }
-                });
+                }, new Response.ErrorListener(){
+            @Override
+            public void onErrorResponse(VolleyError error){
+                contraTV.setText("No funciona el generador");
+            }
+        });
+        queue.add(stringRequest);
+
 
 
 

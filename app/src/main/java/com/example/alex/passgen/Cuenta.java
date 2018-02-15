@@ -15,6 +15,14 @@ public class Cuenta {
     String  nombre;
     Bitmap imagen;
 
+    Cuenta(String filtro,String contrasenia,String nombre){
+        this.filtro=filtro;
+        this.contrasenia=contrasenia;
+        this.nombre=nombre;
+
+    }
+    Cuenta(){}
+
     public String getContrasenia() {
         return contrasenia;
     }

@@ -28,8 +28,6 @@ public class AdaptadorPalabras extends RecyclerView.Adapter<AdaptadorPalabras.Wo
         this.listaStrings=listaStrings;
     }
 
-
-
     @Override
     public AdaptadorPalabras.WordViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View mItemView=inflador.inflate(R.layout.listapalabras_item,parent,false); //Infla el layout con la informacion
