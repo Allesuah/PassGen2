@@ -26,7 +26,7 @@ import static java.security.AccessController.getContext;
 public class MainActivity extends AppCompatActivity {
 
     private RecyclerView mRecyclerView;
-    private AdaptadorPalabras mAdaptador;
+    public static AdaptadorPalabras mAdaptador;
     public static final int INTENTRECIBIDO=1;
     FloatingActionButton fab;
     SQLite_OpenHelper helper;
@@ -43,8 +43,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         recibirData();
 
-
-
         //Toast.makeText(this,"Nombre:"+listaCuenta.get(0).getNombre(),Toast.LENGTH_LONG).show();
 
     }
@@ -54,8 +52,6 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode,resultCode,data);
         if(resultCode==INTENTRECIBIDO){
             if(resultCode==RESULT_OK){
-                //leerBD();
-                resetearInfo();
 
             }
         }

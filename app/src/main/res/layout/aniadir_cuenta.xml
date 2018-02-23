@@ -24,6 +24,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:ems="10"
+        android:fadingEdge="none|horizontal"
         android:inputType="textPersonName"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/NombreTag"
@@ -61,7 +62,8 @@
         android:onClick="generarContrasenia"
         android:text="@string/GenerarButton"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginRight="96dp" />
 
     <TextView
         android:id="@+id/contraTV"
@@ -70,7 +72,8 @@
         android:layout_marginBottom="28dp"
         android:layout_marginEnd="160dp"
         app:layout_constraintBottom_toTopOf="@+id/GeneraButton"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginRight="160dp" />
 
     <Button
         android:id="@+id/GuardarButton"
@@ -81,6 +84,7 @@
         android:onClick="guardarDatos"
         android:text="@string/Boton_guardar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/GeneraButton" />
+        app:layout_constraintTop_toBottomOf="@+id/GeneraButton"
+        android:layout_marginRight="96dp" />
 
 </android.support.constraint.ConstraintLayout>

@@ -46,6 +46,7 @@ public class NuevaCuenta extends AppCompatActivity {
     EditText filtroET;
     TextView contraTV;
     Button generador;
+    public static AdaptadorPalabras mAdaptador;
     Cuenta cuenta;
     public static final String INTCUENTA="Cuenta";
     LinkedList<Cuenta> listaCuenta;
@@ -71,9 +72,9 @@ public class NuevaCuenta extends AppCompatActivity {
         helper.abrir();
         long test = helper.insertarRegistro((nombreET.getText().toString()),(contraTV.getText().toString()),(filtroET.getText().toString()));
         helper.cerrar();
+        mAdaptador.notifyDataSetChanged();
 
-        Toast.makeText(this,"Cuenta: "+test,Toast.LENGTH_LONG).show();
-
+        Toast.makeText(this,"Cuenta guardada",Toast.LENGTH_LONG).show();
 
         Intent iniciarPadre=new Intent();
         setResult(RESULT_OK,iniciarPadre);

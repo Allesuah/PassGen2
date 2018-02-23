@@ -11,5 +11,5 @@
     <string name="contras_txt">Contraseña:</string>
     <string name="cuenta_txt">Cuenta:</string>
     <string name="titulo_img">titulo</string>
-    <string name="subtitulo_splash">MADE BY ALX</string>
+    <string name="subtitulo_splash" translatable="false">MADE BY ALX</string>
 </resources>

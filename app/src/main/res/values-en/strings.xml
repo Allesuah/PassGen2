@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">PassGen</string>
+    <string name="NombreTag">Introduce the account name:</string>
+    <string name="FiltroTag">Introduce category:</string>
+    <string name="GenerarButton">GENERATE PASSWORD</string>
+    <string name="cuentaTexto">Account</string>
+    <string name="contraseniaTxt">Category</string>
+    <string name="filtroTxt">Password</string>
+    <string name="Boton_guardar">Save</string>
+    <string name="categoria_txt">Category:</string>
+    <string name="contras_txt">Password:</string>
+    <string name="cuenta_txt">Account:</string>
+    <string name="titulo_img">title</string>
+</resources>

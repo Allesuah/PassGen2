@@ -24,6 +24,7 @@
         <activity
             android:name=".NuevaCuenta"
             android:label="Añadir Cuenta"
+
             android:parentActivityName=".MainActivity"></activity>
 
     </application>
