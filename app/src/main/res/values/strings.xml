@@ -4,7 +4,12 @@
     <string name="FiltroTag">Introduce categoria:</string>
     <string name="GenerarButton">GENERAR CONTRASEÑA</string>
     <string name="cuentaTexto">Cuenta</string>
-    <string name="contraseniaTxt">Contraseña</string>
-    <string name="filtroTxt">Filtro</string>
+    <string name="contraseniaTxt">Categoría</string>
+    <string name="filtroTxt">Contraseña</string>
     <string name="Boton_guardar">Guardar</string>
+    <string name="categoria_txt">Categoría:</string>
+    <string name="contras_txt">Contraseña:</string>
+    <string name="cuenta_txt">Cuenta:</string>
+    <string name="titulo_img">titulo</string>
+    <string name="subtitulo_splash">MADE BY ALX</string>
 </resources>

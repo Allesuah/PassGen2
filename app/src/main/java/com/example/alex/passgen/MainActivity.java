@@ -27,9 +27,6 @@ public class MainActivity extends AppCompatActivity {
 
     private RecyclerView mRecyclerView;
     private AdaptadorPalabras mAdaptador;
-    private int mCount = 0;
-    public static String sharedPrefFile="com.example.alex.passgen";
-    Cuenta cuenta;
     public static final int INTENTRECIBIDO=1;
     FloatingActionButton fab;
     SQLite_OpenHelper helper;
@@ -44,16 +41,24 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        recibirData();
 
-        helper = new SQLite_OpenHelper(this,"Passgen",null,1);
-        db =  helper.getReadableDatabase();
-        c = db.rawQuery(query,null);
-
-        leerBD();
 
 
         //Toast.makeText(this,"Nombre:"+listaCuenta.get(0).getNombre(),Toast.LENGTH_LONG).show();
 
+    }
+
+    public void onActivityResult(int requestCode, int resultCode,
+                                 Intent data) {
+        super.onActivityResult(requestCode,resultCode,data);
+        if(resultCode==INTENTRECIBIDO){
+            if(resultCode==RESULT_OK){
+                //leerBD();
+                resetearInfo();
+
+            }
+        }
     }
 
     public void lanzarActividad(View view){
@@ -62,12 +67,17 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void updateBD(){
-        mAdaptador.clear();
-        mAdaptador.add(results);
-        //or this.mAdapter.results = results;
+    /*public void updateBD(){
 
         this.mAdaptador.notifyDataSetChanged();
+        Notificar al recycler view que se ha actualizado la información y visualizar
+        mRecyclerView.getAdapter().notifyItemInserted(w);
+    }*/
+
+    public void resetearInfo(){
+        mAdaptador.notifyDataSetChanged();
+        recibirData();
+
     }
 
     public void leerBD(){
@@ -111,19 +121,15 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public void recibirData(){
+        helper = new SQLite_OpenHelper(this,"Passgen",null,1);
+        db =  helper.getReadableDatabase();
+        c = db.rawQuery(query,null);
+        leerBD();
 
-    public void onActivityResult(int requestCode, int resultCode,
-                                 Intent data) {
-        super.onActivityResult(requestCode,resultCode,data);
-        if(resultCode==INTENTRECIBIDO){
-            if(resultCode==RESULT_OK){
-                String respuesta=data.getStringExtra(NuevaCuenta.INTCUENTA);
-                leerBD();
-
-
-            }
-        }
     }
 }
+
+
 
 

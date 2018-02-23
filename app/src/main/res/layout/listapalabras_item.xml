@@ -11,24 +11,60 @@
         android:padding="@dimen/dimensionesRelative">
 
         <TextView
+            android:id="@+id/tV_txtCuenta"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:text="@string/cuenta_txt" />
+
+        <TextView
             android:id="@+id/tV_Cuenta"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
+            android:layout_alignLeft="@+id/tV_Contrasenia"
+            android:layout_alignParentTop="true"
+            android:layout_alignStart="@+id/tV_Contrasenia"
             android:text="@string/cuentaTexto" />
+
+        <TextView
+            android:id="@+id/tv_txtFiltro"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/tv_txtContra"
+            android:text="@string/categoria_txt" />
 
         <TextView
             android:id="@+id/tv_Filtro"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/tV_Cuenta"
+            android:layout_alignLeft="@+id/tV_Cuenta"
+            android:layout_alignStart="@+id/tV_Cuenta"
+            android:layout_below="@+id/tV_Cuenta"
             android:text="@string/filtroTxt" />
+
+        <TextView
+            android:id="@+id/tv_txtContra"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/tV_txtCuenta"
+            android:text="@string/contras_txt" />
+
 
         <TextView
             android:id="@+id/tV_Contrasenia"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/tv_Filtro"
+            android:layout_below="@+id/tv_Filtro"
+            android:layout_marginLeft="51dp"
+            android:layout_marginStart="51dp"
+            android:layout_toEndOf="@+id/tv_txtContra"
+            android:layout_toRightOf="@+id/tv_txtContra"
             android:text="@string/contraseniaTxt" />
 
 
