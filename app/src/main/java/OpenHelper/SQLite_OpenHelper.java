@@ -13,6 +13,9 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class SQLite_OpenHelper extends SQLiteOpenHelper {
     public static final int DATABASE_VERSION = 1;
+    private static final String SQL_DELETE_ENTRIES =
+            "DROP TABLE IF EXISTS Cuenta";
+
 
 
 
@@ -29,7 +32,8 @@ public class SQLite_OpenHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
-
+        sqLiteDatabase.execSQL(SQL_DELETE_ENTRIES);
+        onCreate(sqLiteDatabase);
     }
 
     //Abrir BD
@@ -43,15 +47,15 @@ public class SQLite_OpenHelper extends SQLiteOpenHelper {
 
     //Metodo insertar en la tabla Cuenta
 
-    public void insertarRegistro(String nombre, String pass, String filtro){
+    public long insertarRegistro(String nombre, String pass, String filtro){
         ContentValues valores=new ContentValues();
         valores.put("Nombre",nombre);
         valores.put("Filtro",filtro);
         valores.put("Pass",pass);
 
-        long nuevaLinea;
-        nuevaLinea=this.getWritableDatabase().insert("Cuenta",null,valores);
+        SQLiteDatabase db =  this.getWritableDatabase();
 
+        return db.insert("Cuenta",null,valores);
     }
 
 }

@@ -11,6 +11,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 
@@ -31,12 +32,12 @@ public class MainActivity extends AppCompatActivity {
     Cuenta cuenta;
     public static final int INTENTRECIBIDO=1;
     FloatingActionButton fab;
-    SQLite_OpenHelper helper=new SQLite_OpenHelper(this,"Cuenta",null,1);
-    SQLiteDatabase db= helper.getReadableDatabase();
+    SQLite_OpenHelper helper;
+    SQLiteDatabase db;
     String query="SELECT * FROM Cuenta";
 
-    Cursor c=db.rawQuery(query,null);
-    List<Cuenta>listaCuenta=new ArrayList<Cuenta>();
+    Cursor c;
+    LinkedList<Cuenta>listaCuenta;
 
 
     @Override
@@ -44,17 +45,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        if(cursor.moveToFirst()){
-            do{
-                listaCuenta.add(new Cuenta(
-                        c.getInt(0), //id
-                        c.getString(1), //Nombre
-                        c.getString(2), //Pass
-                        c.getString(3),//Filtro
-                ));
-            } while(cursor.moveToNext());
+        helper = new SQLite_OpenHelper(this,"Passgen",null,1);
+        db =  helper.getReadableDatabase();
+        c = db.rawQuery(query,null);
 
-        }
+        leerBD();
+
+
+        //Toast.makeText(this,"Nombre:"+listaCuenta.get(0).getNombre(),Toast.LENGTH_LONG).show();
 
     }
 
@@ -64,13 +62,44 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public void updateBD(){
+        mAdaptador.clear();
+        mAdaptador.add(results);
+        //or this.mAdapter.results = results;
+
+        this.mAdaptador.notifyDataSetChanged();
+    }
+
+    public void leerBD(){
+        listaCuenta=new LinkedList<Cuenta>();
+
+        if(c.moveToFirst()){
+            do{
+                listaCuenta.add(new Cuenta(
+                        c.getInt(0), //id
+                        c.getString(1), //Nombre
+                        c.getString(2), //Pass
+                        c.getString(3)//Filtro
+                ));
+            } while(c.moveToNext());
+
+        }else{
+            Toast.makeText(this,"NINGUN VALOR",Toast.LENGTH_LONG).show();
+        }
+        cargarListView();
+    }
+
     public void cargarListView(){
         //Asigna el recyclerview
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerview);
 
+
+        mRecyclerView.invalidate();
+
         //Crea un adaptador y lo llena con la info para ser mostrada
 
-        mAdaptador = new AdaptadorPalabras(this, mListaPal);
+        mAdaptador = new AdaptadorPalabras(this, listaCuenta);
+
 
         //Conectar el adaptador con el Recycler
 
@@ -89,7 +118,9 @@ public class MainActivity extends AppCompatActivity {
         if(resultCode==INTENTRECIBIDO){
             if(resultCode==RESULT_OK){
                 String respuesta=data.getStringExtra(NuevaCuenta.INTCUENTA);
-                cargarListView();
+                leerBD();
+
+
             }
         }
     }

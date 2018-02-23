@@ -10,18 +10,31 @@ import android.widget.ImageView;
 //Clase para recorrer datos.
 public class Cuenta {
     //variables
+    int id;
     String filtro;
     String contrasenia;
     String  nombre;
 
 
-    Cuenta(String filtro,String contrasenia,String nombre){
+
+
+    Cuenta(int id, String filtro, String contrasenia, String nombre){
         this.filtro=filtro;
         this.contrasenia=contrasenia;
         this.nombre=nombre;
+        this.id=id;
 
     }
+
     Cuenta(){}
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getContrasenia() {
         return contrasenia;

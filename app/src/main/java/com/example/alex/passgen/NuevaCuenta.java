@@ -21,15 +21,15 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.google.gson.Gson;
 
-import org.w3c.dom.Text;
+
+
 
 import java.util.LinkedList;
 
 import OpenHelper.SQLite_OpenHelper;
 
-import static com.example.alex.passgen.MainActivity.sharedPrefFile;
+
 
 
 /**
@@ -50,7 +50,7 @@ public class NuevaCuenta extends AppCompatActivity {
     public static final String INTCUENTA="Cuenta";
     LinkedList<Cuenta> listaCuenta;
     SQLite_OpenHelper helper=new SQLite_OpenHelper(this,"Passgen",null,1);
-   //public static SharedPreferences archivo;
+    //public static SharedPreferences archivo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,32 +63,18 @@ public class NuevaCuenta extends AppCompatActivity {
         filtroET = (EditText) findViewById(R.id.FiltroEt);
         contraTV = (TextView) findViewById(R.id.contraTV);
         generador = (Button) findViewById(R.id.GeneraButton);
-        //archivo=getSharedPreferences(sharedPrefFile,MODE_PRIVATE);
 
-       /* if(savedInstanceState!=null){
-            Gson gson = new Gson();
-            String json = archivo.getString("objetoCuenta", "");
-
-        }else{//Si no hay nada en el Preferences creas una lista de tipo Cuenta
-            listaCuenta=new LinkedList<>();
-        }*/
 
     }
 
-    public void guardarDatos(View view){ //Aqui estas colocando en el objeto cuenta cada dato recogido por los EditText
-            /*cuenta.setNombre(nombreET.getText().toString());
-            cuenta.setFiltro(filtroET.getText().toString());
-            cuenta.setContrasenia(contraTV.getText().toString());*/
-            helper.abrir();
-            helper.insertarRegistro((nombreET.getText().toString()),(contraTV.getText().toString()),(filtroET.getText().toString()));
-            helper.cerrar();
+    public void guardarDatos(View view){
+        helper.abrir();
+        long test = helper.insertarRegistro((nombreET.getText().toString()),(contraTV.getText().toString()),(filtroET.getText().toString()));
+        helper.cerrar();
 
-            Toast.makeText(this,"Cuenta guardada!",Toast.LENGTH_LONG).show();
+        Toast.makeText(this,"Cuenta: "+test,Toast.LENGTH_LONG).show();
 
-        /*SharedPreferences  mPrefs = getPreferences(MODE_PRIVATE); //Aqui estas guardando en el Preferences los datos de cada objeto Cuenta
-        SharedPreferences.Editor prefsEditor = mPrefs.edit();*/
-       /* prefsEditor.putString("objetoCuenta", json);
-        prefsEditor.commit();*/
+
         Intent iniciarPadre=new Intent();
         setResult(RESULT_OK,iniciarPadre);
         finish();
