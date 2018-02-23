@@ -2,6 +2,8 @@ package com.example.alex.passgen;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,18 +14,29 @@ import android.view.View;
 
 import com.google.gson.Gson;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
+
+import OpenHelper.SQLite_OpenHelper;
+
+import static java.security.AccessController.getContext;
 
 public class MainActivity extends AppCompatActivity {
-    private LinkedList<Cuenta> mListaPal;
+
     private RecyclerView mRecyclerView;
     private AdaptadorPalabras mAdaptador;
     private int mCount = 0;
-    public static SharedPreferences archivo;
     public static String sharedPrefFile="com.example.alex.passgen";
     Cuenta cuenta;
     public static final int INTENTRECIBIDO=1;
     FloatingActionButton fab;
+    SQLite_OpenHelper helper=new SQLite_OpenHelper(this,"Cuenta",null,1);
+    SQLiteDatabase db= helper.getReadableDatabase();
+    String query="SELECT * FROM Cuenta";
+
+    Cursor c=db.rawQuery(query,null);
+    List<Cuenta>listaCuenta=new ArrayList<Cuenta>();
 
 
     @Override
@@ -31,20 +44,17 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        archivo=getSharedPreferences(sharedPrefFile,MODE_PRIVATE);
+        if(cursor.moveToFirst()){
+            do{
+                listaCuenta.add(new Cuenta(
+                        c.getInt(0), //id
+                        c.getString(1), //Nombre
+                        c.getString(2), //Pass
+                        c.getString(3),//Filtro
+                ));
+            } while(cursor.moveToNext());
 
-       if(savedInstanceState!=null){ //Aqui estas recibiendo los datos guardados en Preferences (añadidos en NuevaCuenta.java)
-           Gson gson = new Gson();
-           String json = archivo.getString("objetoCuenta", "");
-          /* LinkedList<Cuenta> recibeDato = gson.fromJson(json, Cuenta.class);*/
-
-
-
-       }else{//Si no hay nada en el Preferences creas una lista de tipo Cuenta
-           mListaPal=new LinkedList<>();
-       }
-
-
+        }
 
     }
 
@@ -71,6 +81,7 @@ public class MainActivity extends AppCompatActivity {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
     }
+
 
     public void onActivityResult(int requestCode, int resultCode,
                                  Intent data) {

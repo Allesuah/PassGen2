@@ -41,7 +41,7 @@ public class AdaptadorPalabras extends RecyclerView.Adapter<AdaptadorPalabras.Wo
         holder.cuentaTV.setText(mCurrent.getNombre());
         holder.filtroTV.setText(mCurrent.getFiltro());
         holder.contraTV.setText(mCurrent.getContrasenia());
-        holder.imagenV.setImageBitmap(mCurrent.getImagen());
+
     }
 
     @Override
@@ -53,7 +53,6 @@ public class AdaptadorPalabras extends RecyclerView.Adapter<AdaptadorPalabras.Wo
         public final TextView cuentaTV;
         public final TextView contraTV;
         public final TextView filtroTV;
-        public final ImageView imagenV;
         final AdaptadorPalabras adaptador;
 
 
@@ -64,7 +63,6 @@ public class AdaptadorPalabras extends RecyclerView.Adapter<AdaptadorPalabras.Wo
             cuentaTV=(TextView)itemView.findViewById(R.id.tV_Cuenta);
             contraTV=(TextView)itemView.findViewById(R.id.tV_Contrasenia);
             filtroTV=(TextView)itemView.findViewById(R.id.tv_Filtro);
-            imagenV=(ImageView)itemView.findViewById(R.id.imagen_Cuenta);
             this.adaptador=adaptador;
         }
     }

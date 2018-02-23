@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -25,6 +26,8 @@ import com.google.gson.Gson;
 import org.w3c.dom.Text;
 
 import java.util.LinkedList;
+
+import OpenHelper.SQLite_OpenHelper;
 
 import static com.example.alex.passgen.MainActivity.sharedPrefFile;
 
@@ -46,7 +49,8 @@ public class NuevaCuenta extends AppCompatActivity {
     Cuenta cuenta;
     public static final String INTCUENTA="Cuenta";
     LinkedList<Cuenta> listaCuenta;
-    public static SharedPreferences archivo;
+    SQLite_OpenHelper helper=new SQLite_OpenHelper(this,"Passgen",null,1);
+   //public static SharedPreferences archivo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,20 +63,15 @@ public class NuevaCuenta extends AppCompatActivity {
         filtroET = (EditText) findViewById(R.id.FiltroEt);
         contraTV = (TextView) findViewById(R.id.contraTV);
         generador = (Button) findViewById(R.id.GeneraButton);
-        archivo=getSharedPreferences(sharedPrefFile,MODE_PRIVATE);
+        //archivo=getSharedPreferences(sharedPrefFile,MODE_PRIVATE);
 
-        if(savedInstanceState!=null){
+       /* if(savedInstanceState!=null){
             Gson gson = new Gson();
             String json = archivo.getString("objetoCuenta", "");
 
-            
-
-            listaCuenta.add(new Cuenta((nombreET.getText().toString()),(filtroET.getText().toString()),(contraTV.getText().toString())));
-
-
         }else{//Si no hay nada en el Preferences creas una lista de tipo Cuenta
             listaCuenta=new LinkedList<>();
-        }
+        }*/
 
     }
 
@@ -80,19 +79,17 @@ public class NuevaCuenta extends AppCompatActivity {
             /*cuenta.setNombre(nombreET.getText().toString());
             cuenta.setFiltro(filtroET.getText().toString());
             cuenta.setContrasenia(contraTV.getText().toString());*/
+            helper.abrir();
+            helper.insertarRegistro((nombreET.getText().toString()),(contraTV.getText().toString()),(filtroET.getText().toString()));
+            helper.cerrar();
 
-
-
-
+            Toast.makeText(this,"Cuenta guardada!",Toast.LENGTH_LONG).show();
 
         /*SharedPreferences  mPrefs = getPreferences(MODE_PRIVATE); //Aqui estas guardando en el Preferences los datos de cada objeto Cuenta
         SharedPreferences.Editor prefsEditor = mPrefs.edit();*/
-
-
        /* prefsEditor.putString("objetoCuenta", json);
         prefsEditor.commit();*/
         Intent iniciarPadre=new Intent();
-        iniciarPadre.putExtra(INTCUENTA,json);
         setResult(RESULT_OK,iniciarPadre);
         finish();
 

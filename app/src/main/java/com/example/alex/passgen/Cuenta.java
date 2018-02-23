@@ -13,7 +13,7 @@ public class Cuenta {
     String filtro;
     String contrasenia;
     String  nombre;
-    Bitmap imagen;
+
 
     Cuenta(String filtro,String contrasenia,String nombre){
         this.filtro=filtro;
@@ -37,14 +37,6 @@ public class Cuenta {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
-    }
-
-    public Bitmap getImagen() {
-        return imagen;
-    }
-
-    public void setImagen(Bitmap imagen) {
-        this.imagen = imagen;
     }
 
     public String getFiltro() {

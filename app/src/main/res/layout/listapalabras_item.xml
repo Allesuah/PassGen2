@@ -12,23 +12,17 @@
         android:layout_height="wrap_content"
         >
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/imagen_Cuenta"
-            android:adjustViewBounds="true"
-            />
         <TextView
             android:id="@+id/tV_Cuenta"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@id/imagen_Cuenta"
+
             android:text="@string/cuentaTexto"
             />
         <TextView
             android:id="@+id/tv_Filtro"
             android:layout_width="wrap_content"
-            android:layout_below="@id/imagen_Cuenta"
+            android:layout_below="@id/tV_Cuenta"
             android:layout_height="wrap_content"
             android:text="@string/filtroTxt"
             />
