@@ -1,74 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="?android:selectableItemBackground">
+    android:background="#E0E0E0"
+    android:padding="10dp">
 
-    <RelativeLayout
+    <android.support.v7.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/dimensionesRelative">
+        android:background="?android:selectableItemBackground"
+        tools:layout_editor_absoluteX="10dp"
+        tools:layout_editor_absoluteY="10dp">
 
-        <TextView
-            android:id="@+id/tV_txtCuenta"
-            android:layout_width="wrap_content"
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:text="@string/cuenta_txt" />
+            android:padding="@dimen/dimensionesRelative">
 
-        <TextView
-            android:id="@+id/tV_Cuenta"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/tV_Contrasenia"
-            android:layout_alignParentTop="true"
-            android:layout_alignStart="@+id/tV_Contrasenia"
-            android:text="@string/cuentaTexto" />
+            <TextView
+                android:id="@+id/tV_txtCuenta"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:text="@string/cuenta_txt" />
 
-        <TextView
-            android:id="@+id/tv_txtFiltro"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/tv_txtContra"
-            android:text="@string/categoria_txt" />
+            <TextView
+                android:id="@+id/tV_Cuenta"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/tV_Contrasenia"
+                android:layout_alignParentTop="true"
+                android:layout_alignStart="@+id/tV_Contrasenia"
+                android:text="@string/cuentaTexto" />
 
-        <TextView
-            android:id="@+id/tv_Filtro"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/tV_Cuenta"
-            android:layout_alignStart="@+id/tV_Cuenta"
-            android:layout_below="@+id/tV_Cuenta"
-            android:text="@string/filtroTxt" />
+            <TextView
+                android:id="@+id/tv_txtFiltro"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/tv_txtContra"
+                android:text="@string/categoria_txt" />
 
-        <TextView
-            android:id="@+id/tv_txtContra"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/tV_txtCuenta"
-            android:text="@string/contras_txt" />
+            <TextView
+                android:id="@+id/tv_Filtro"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/tV_Cuenta"
+                android:layout_alignStart="@+id/tV_Cuenta"
+                android:layout_below="@+id/tV_Cuenta"
+                android:text="@string/filtroTxt" />
 
-
-        <TextView
-            android:id="@+id/tV_Contrasenia"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/tv_Filtro"
-            android:layout_marginLeft="51dp"
-            android:layout_marginStart="51dp"
-            android:layout_toEndOf="@+id/tv_txtContra"
-            android:layout_toRightOf="@+id/tv_txtContra"
-            android:text="@string/contraseniaTxt" />
+            <TextView
+                android:id="@+id/tv_txtContra"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/tV_txtCuenta"
+                android:text="@string/contras_txt" />
 
 
-    </RelativeLayout>
+            <TextView
+                android:id="@+id/tV_Contrasenia"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_Filtro"
+                android:layout_marginLeft="51dp"
+                android:layout_marginStart="51dp"
+                android:layout_toEndOf="@+id/tv_txtContra"
+                android:layout_toRightOf="@+id/tv_txtContra"
+                android:text="@string/contraseniaTxt" />
 
 
-</android.support.v7.widget.CardView>
+        </RelativeLayout>
+
+
+    </android.support.v7.widget.CardView>
+</android.support.constraint.ConstraintLayout>
+
+

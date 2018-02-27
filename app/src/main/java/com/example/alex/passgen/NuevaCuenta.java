@@ -72,7 +72,7 @@ public class NuevaCuenta extends AppCompatActivity {
         helper.abrir();
         long test = helper.insertarRegistro((nombreET.getText().toString()),(contraTV.getText().toString()),(filtroET.getText().toString()));
         helper.cerrar();
-        mAdaptador.notifyDataSetChanged();
+
 
         Toast.makeText(this,"Cuenta guardada",Toast.LENGTH_LONG).show();
 

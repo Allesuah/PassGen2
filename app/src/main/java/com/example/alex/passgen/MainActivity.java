@@ -50,9 +50,10 @@ public class MainActivity extends AppCompatActivity {
     public void onActivityResult(int requestCode, int resultCode,
                                  Intent data) {
         super.onActivityResult(requestCode,resultCode,data);
-        if(resultCode==INTENTRECIBIDO){
+        if(requestCode==INTENTRECIBIDO){
             if(resultCode==RESULT_OK){
-
+                leerBD();
+                mAdaptador.notifyItemInserted(listaCuenta.size());
             }
         }
     }
