@@ -42,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         recibirData();
+        fab=findViewById(R.id.fab);
 
         //Toast.makeText(this,"Nombre:"+listaCuenta.get(0).getNombre(),Toast.LENGTH_LONG).show();
 
@@ -52,8 +53,9 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode,resultCode,data);
         if(requestCode==INTENTRECIBIDO){
             if(resultCode==RESULT_OK){
-                leerBD();
-                mAdaptador.notifyItemInserted(listaCuenta.size());
+                recibirData();
+                mAdaptador.notifyItemInserted(listaCuenta.size()+1);
+
             }
         }
     }

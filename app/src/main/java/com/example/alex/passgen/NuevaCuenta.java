@@ -73,7 +73,6 @@ public class NuevaCuenta extends AppCompatActivity {
         long test = helper.insertarRegistro((nombreET.getText().toString()),(contraTV.getText().toString()),(filtroET.getText().toString()));
         helper.cerrar();
 
-
         Toast.makeText(this,"Cuenta guardada",Toast.LENGTH_LONG).show();
 
         Intent iniciarPadre=new Intent();
