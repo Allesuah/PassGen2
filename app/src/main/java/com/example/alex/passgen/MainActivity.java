@@ -1,7 +1,7 @@
 package com.example.alex.passgen;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
+
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.design.widget.FloatingActionButton;
@@ -9,19 +9,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
+
 import android.view.View;
 import android.widget.Toast;
 
-import com.google.gson.Gson;
 
-import java.util.ArrayList;
+
 import java.util.LinkedList;
-import java.util.List;
+
 
 import OpenHelper.SQLite_OpenHelper;
 
-import static java.security.AccessController.getContext;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -73,11 +72,7 @@ public class MainActivity extends AppCompatActivity {
         mRecyclerView.getAdapter().notifyItemInserted(w);
     }*/
 
-    public void resetearInfo(){
-        mAdaptador.notifyDataSetChanged();
-        recibirData();
 
-    }
 
     public void leerBD(){
         listaCuenta=new LinkedList<Cuenta>();
@@ -100,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void cargarListView(){
         //Asigna el recyclerview
-        mRecyclerView = (RecyclerView) findViewById(R.id.recyclerview);
+        mRecyclerView = findViewById(R.id.recyclerview);
 
 
         mRecyclerView.invalidate();
