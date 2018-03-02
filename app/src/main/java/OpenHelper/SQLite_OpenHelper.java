@@ -58,4 +58,9 @@ public class SQLite_OpenHelper extends SQLiteOpenHelper {
         return db.insert("Cuenta",null,valores);
     }
 
+    public long eliminar(String nombre){
+        SQLiteDatabase db=this.getWritableDatabase();
+        return db.delete("Cuenta","Nombre =?",new String[]{nombre});
+    }
+
 }

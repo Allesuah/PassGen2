@@ -2,13 +2,11 @@ package com.example.alex.passgen;
 
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.support.v7.view.menu.MenuView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import org.w3c.dom.Text;
@@ -49,20 +47,35 @@ public class AdaptadorPalabras extends RecyclerView.Adapter<AdaptadorPalabras.Wo
         return listaStrings.size();
     }
 
+    //Elimina linea
+    public void removeItem(int position){
+        listaStrings.remove(position);
+        notifyItemRemoved(position);
+    }
+
+    //Restaura linea
+    public void restoreItem(Cuenta cuenta, int position){
+        listaStrings.add(position,cuenta);
+        notifyItemInserted(position);
+    }
+
+
+
     class WordViewHolder extends RecyclerView.ViewHolder{ //Inicializar variables
-        public final TextView cuentaTV;
-        public final TextView contraTV;
-        public final TextView filtroTV;
+        public final TextView cuentaTV,contraTV,filtroTV;
         final AdaptadorPalabras adaptador;
+        public RelativeLayout frontal,fondo;
 
 
 
         WordViewHolder(View itemView,AdaptadorPalabras adaptador){ //Se les pasa todos los items del layout más el adapatador por argumentos
             super(itemView);
 
-            cuentaTV=(TextView)itemView.findViewById(R.id.tV_Cuenta);
-            contraTV=(TextView)itemView.findViewById(R.id.tV_Contrasenia);
-            filtroTV=(TextView)itemView.findViewById(R.id.tv_Filtro);
+            cuentaTV=itemView.findViewById(R.id.tV_Cuenta);
+            contraTV=itemView.findViewById(R.id.tV_Contrasenia);
+            filtroTV=itemView.findViewById(R.id.tv_Filtro);
+            frontal=itemView.findViewById(R.id.delantera);
+            fondo=itemView.findViewById(R.id.fondo);
             this.adaptador=adaptador;
         }
     }

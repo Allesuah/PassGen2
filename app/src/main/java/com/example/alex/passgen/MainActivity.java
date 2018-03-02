@@ -4,12 +4,18 @@ import android.content.Intent;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.View;
 import android.widget.Toast;
 
@@ -22,7 +28,7 @@ import OpenHelper.SQLite_OpenHelper;
 
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements RecyclerItemTouchHelper.RecyclerItemTouchHelperListener{
 
     private RecyclerView mRecyclerView;
     public static AdaptadorPalabras mAdaptador;
@@ -31,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
     SQLite_OpenHelper helper;
     SQLiteDatabase db;
     String query="SELECT * FROM Cuenta";
-
+    private CoordinatorLayout coordinatorLayout;
     Cursor c;
     LinkedList<Cuenta>listaCuenta;
 
@@ -40,10 +46,14 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        mRecyclerView =findViewById(R.id.recyclerview);
         recibirData();
         fab=findViewById(R.id.fab);
+        coordinatorLayout=findViewById(R.id.coord);
+        ItemTouchHelper.SimpleCallback itemTouchHelperCallback= new RecyclerItemTouchHelper(0,ItemTouchHelper.LEFT,this);
+        new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(mRecyclerView);
 
-        //Toast.makeText(this,"Nombre:"+listaCuenta.get(0).getNombre(),Toast.LENGTH_LONG).show();
+
 
     }
 
@@ -65,13 +75,30 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    /*public void updateBD(){
+    public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction,int position){
+      if(viewHolder instanceof AdaptadorPalabras.WordViewHolder){
+          String name=listaCuenta.get(viewHolder.getAdapterPosition()).getNombre();
 
-        this.mAdaptador.notifyDataSetChanged();
-        Notificar al recycler view que se ha actualizado la información y visualizar
-        mRecyclerView.getAdapter().notifyItemInserted(w);
-    }*/
 
+          final Cuenta deletedCuenta =listaCuenta.get(viewHolder.getAdapterPosition());
+          final int deletedIndex =viewHolder.getAdapterPosition();
+
+          mAdaptador.removeItem(viewHolder.getAdapterPosition());
+
+          Snackbar snackbar=Snackbar
+                  .make(coordinatorLayout,name+" Eliminado",Snackbar.LENGTH_LONG);
+          snackbar.setAction("DESHACER ?",new View.OnClickListener(){
+              @Override
+                      public void onClick(View view){
+
+                  mAdaptador.restoreItem(deletedCuenta,deletedIndex);
+              }
+          });
+          helper.eliminar(name);
+        snackbar.setActionTextColor(Color.RED);
+        snackbar.show();
+      }
+    }
 
 
     public void leerBD(){
@@ -95,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void cargarListView(){
         //Asigna el recyclerview
-        mRecyclerView = findViewById(R.id.recyclerview);
+       /* mRecyclerView = findViewById(R.id.recyclerview);
 
 
         mRecyclerView.invalidate();
@@ -112,7 +139,13 @@ public class MainActivity extends AppCompatActivity {
         //Dar al Recycler la layout
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-
+*/
+       RecyclerView.LayoutManager mLayoutManager=new LinearLayoutManager(getApplicationContext());
+       mRecyclerView.setLayoutManager(mLayoutManager);
+       mRecyclerView.setItemAnimator(new DefaultItemAnimator());
+       mRecyclerView.addItemDecoration(new DividerItemDecoration(this,DividerItemDecoration.VERTICAL));mAdaptador = new AdaptadorPalabras(this, listaCuenta);
+        mAdaptador = new AdaptadorPalabras(this, listaCuenta);
+       mRecyclerView.setAdapter(mAdaptador);
     }
 
     public void recibirData(){
